@@ -1,10 +1,10 @@
-import {
-  Links,
-  Meta,
-  Outlet,
-  Scripts,
-  ScrollRestoration,
-} from "@remix-run/react";
+import { Links, Meta, Outlet, Scripts, ScrollRestoration } from '@remix-run/react'
+
+import '@unocss/reset/tailwind.css'
+// main.ts
+import '@unocss/reset/tailwind-compat.css'
+// eslint-disable-next-line import/no-unresolved
+import 'virtual:uno.css'
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -21,9 +21,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Scripts />
       </body>
     </html>
-  );
+  )
 }
 
 export default function App() {
-  return <Outlet />;
+  return <Outlet />
 }

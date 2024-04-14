@@ -34,7 +34,7 @@ export const sepolia = defineChain({
 })
 
 const config = getDefaultConfig({
-  appName: 'zkt-swap-hook',
+  appName: 'unoi-ssr',
   projectId: 'f18c88f1b8f4a066d3b705c6b13b71a8',
   chains: [sepolia],
   ssr: true,

@@ -1,11 +1,14 @@
 import { ConnectButton } from '@rainbow-me/rainbowkit'
+import { Link } from '@remix-run/react'
 
 export const Header = () => {
   return (
     <div className="h-16 border-b-1 border-white box-border">
       <div className="container m-auto h-full flex justify-between items-center sm:px-8 lt-sm:px-4">
         <div className="flex items-center font-bold cursor-pointer">
-          <span className="text-xl">Unoi</span>
+          <Link to="/">
+            <span className="text-xl">Unoi</span>
+          </Link>
           <span className="flex-col-center ml-3 py-.25 px-1.5 text-xs text-#666 bg-white rounded-full font-light">
             <span
               style={{

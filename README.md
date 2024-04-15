@@ -4,11 +4,9 @@
 
 💖 power by remix + vite + react + wagmi + ts
 
-preview [demo](https://vite-antd-seed.vercel.app/)
+preview [demo](https://remix-starter-seven.vercel.app)
 
 <img width="100%" alt="image" src="https://user-images.githubusercontent.com/21095710/234826388-de4d17b7-e6f2-4fa5-926c-c8fa527f7ef9.png">
-
-[![Deploy on Zeabur](https://zeabur.com/button.svg)](https://dash.zeabur.com/templates/J93U8I)
 
 ## QuickStart
 

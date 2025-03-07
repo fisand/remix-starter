@@ -18,13 +18,13 @@ export default defineConfig({
       compiler: 'jsx',
       jsx: 'react',
       customCollections: {
-        'fisand-icons': FileSystemIconLoader(`${resolve(import.meta.dirname, 'src/assets/icons')}/`, svg =>
+        'fisand-icons': FileSystemIconLoader(`${resolve(import.meta.dirname, 'app/assets/icons')}/`, svg =>
           svg.replace(/^<svg /, '<svg fill="currentColor" ')),
       },
     }),
     AutoImport({
       imports: ['react'],
-      dts: './auto-imports.d.ts',
+      dts: './app/auto-imports.d.ts',
       resolvers: [
         IconsResolver({
           componentPrefix: 'Icon',

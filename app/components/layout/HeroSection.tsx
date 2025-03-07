@@ -75,7 +75,7 @@ function HeroGeometric({
   title2 = 'Crafting Exceptional Websites',
   description = 'Help you build better websites with a focus on design, performance, and user experience.',
 }: {
-  badge?: string
+  badge?: React.ReactNode
   title1?: string
   title2?: string
   description?: string

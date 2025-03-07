@@ -18,6 +18,6 @@ export async function loader() {
 export default function Home({
   loaderData,
 }: Route.ComponentProps) {
-  const author = loaderData.users?.[0]
-  return <Welcome author={author} />
+  const authors = loaderData.users
+  return <Welcome author={authors} />
 }

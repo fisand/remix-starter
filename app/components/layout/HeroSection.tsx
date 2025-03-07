@@ -1,5 +1,6 @@
-import { motion } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 import { Circle } from 'lucide-react'
+import { useEffect, useState } from 'react'
 
 import { cn } from '@/lib/utils'
 
@@ -70,16 +71,26 @@ function ElegantShape({
 }
 
 function HeroGeometric({
-  badge = 'Design Collective',
+  badge = ['Design Collective', 'Creative Studio', 'Web Development'],
   title1 = 'Elevate Your Digital Vision',
   title2 = 'Crafting Exceptional Websites',
   description = 'Help you build better websites with a focus on design, performance, and user experience.',
 }: {
-  badge?: React.ReactNode
+  badge?: string[]
   title1?: string
   title2?: string
   description?: string
 }) {
+  const [currentBadgeIndex, setCurrentBadgeIndex] = useState(0)
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentBadgeIndex(prev => (prev + 1) % badge.length)
+    }, 3000)
+
+    return () => clearInterval(interval)
+  }, [badge.length])
+
   const fadeUpVariants = {
     hidden: { opacity: 0, y: 30 },
     visible: (i: number) => ({
@@ -151,12 +162,31 @@ function HeroGeometric({
             variants={fadeUpVariants}
             initial="hidden"
             animate="visible"
-            className="mb-8 inline-flex items-center gap-2 border border-white/[0.08] rounded-full bg-white/[0.03] px-3 py-1 md:mb-12"
+            className="mb-8 w-320px inline-flex items-center gap-2 border border-white/[0.08] rounded-full bg-white/[0.03] px-3 py-1 md:mb-12"
           >
             <Circle className="h-2 w-2 fill-rose-500/80" />
             <span className="text-sm text-white/60 tracking-wide">
-              {badge}
+              Fisand template created by
             </span>
+            <div className="h-6 overflow-hidden">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={currentBadgeIndex}
+                  initial={{ y: 20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  exit={{ y: -20, opacity: 0 }}
+                  transition={{
+                    duration: 0.5,
+                    ease: 'easeInOut',
+                  }}
+                  className="h-6 flex items-center justify-center"
+                >
+                  <span className="text-sm text-white/60 tracking-wide">
+                    {badge[currentBadgeIndex]}
+                  </span>
+                </motion.div>
+              </AnimatePresence>
+            </div>
           </motion.div>
 
           <motion.div

@@ -2,10 +2,10 @@ import type { User } from '@prisma/client'
 
 import { HeroGeometric } from '@/components/layout/HeroSection'
 
-export function Welcome({ author }: { author: User }) {
+export function Welcome({ author }: { author: User[] }) {
   return (
     <HeroGeometric
-      badge={`Fisand template created by ${author.name}`}
+      badge={author.map(author => author.name ?? '')}
       title1="Simple design"
       title2="Built for efficiency"
     />

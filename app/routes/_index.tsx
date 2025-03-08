@@ -1,7 +1,7 @@
 import { prisma } from '@/lib/db'
 
 import { Welcome } from '../welcome/welcome'
-import type { Route } from './+types/home'
+import type { Route } from './+types/_index'
 
 export function meta(_: Route.MetaArgs) {
   return [

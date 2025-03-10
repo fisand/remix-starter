@@ -1,7 +1,17 @@
 import '@unocss/reset/tailwind.css'
 import 'virtual:uno.css'
 import './app.css'
+import '@rainbow-me/rainbowkit/styles.css'
 
+import {
+  getDefaultConfig,
+  RainbowKitProvider,
+} from '@rainbow-me/rainbowkit'
+import {
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query'
+import { Briefcase, FileText, Home, User } from 'lucide-react'
 import {
   isRouteErrorResponse,
   Links,
@@ -10,8 +20,26 @@ import {
   Scripts,
   ScrollRestoration,
 } from 'react-router'
+import { WagmiProvider } from 'wagmi'
+import {
+  arbitrum,
+  base,
+  mainnet,
+  optimism,
+  polygon,
+} from 'wagmi/chains'
 
 import type { Route } from './+types/root'
+import { Navbar } from './components/layout/Navbar'
+
+const config = getDefaultConfig({
+  appName: 'My RainbowKit App',
+  projectId: 'YOUR_PROJECT_ID',
+  chains: [mainnet, polygon, optimism, arbitrum, base],
+  ssr: true, // If your dApp uses server side rendering (SSR)
+})
+
+const queryClient = new QueryClient()
 
 export const links: Route.LinksFunction = () => [
   { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
@@ -36,7 +64,20 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body>
-        {children}
+        <WagmiProvider config={config}>
+          <QueryClientProvider client={queryClient}>
+            <RainbowKitProvider>
+              <Navbar items={[
+                { name: 'Home', url: '#', icon: Home },
+                { name: 'About', url: '#', icon: User },
+                { name: 'Projects', url: '#', icon: Briefcase },
+                { name: 'Connect', url: '#', icon: FileText },
+              ]}
+              />
+              {children}
+            </RainbowKitProvider>
+          </QueryClientProvider>
+        </WagmiProvider>
         <ScrollRestoration />
         <Scripts />
       </body>

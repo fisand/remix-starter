@@ -7,6 +7,7 @@ import { FileSystemIconLoader } from 'unplugin-icons/loaders'
 import IconsResolver from 'unplugin-icons/resolver'
 import Icons from 'unplugin-icons/vite'
 import { defineConfig } from 'vite'
+import checker from 'vite-plugin-checker'
 import tsconfigPaths from 'vite-tsconfig-paths'
 
 export default defineConfig({
@@ -14,6 +15,9 @@ export default defineConfig({
     unocss(),
     reactRouter(),
     tsconfigPaths(),
+    checker({
+      typescript: true,
+    }),
     Icons({
       compiler: 'jsx',
       jsx: 'react',
@@ -33,4 +37,26 @@ export default defineConfig({
       dirs: ['./app/components/ui'],
     }),
   ],
+  build: {
+    rollupOptions: {
+      onLog(level, log, handler) {
+        // ignore /*#__PURE__*/
+        if (log.message.includes('/*#__PURE__*/')) {
+          return
+        }
+
+        // ignore rollup warning about 'use client'
+        if (log.message.includes('Module level directives cause errors when bundled'))
+          return
+
+        // ignore sourcemap warning about 'Can't resolve original location of error.'
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        if (log.cause && (log.cause as any).message === `Can't resolve original location of error.`) {
+          return
+        }
+
+        handler(level, log)
+      },
+    },
+  },
 })
